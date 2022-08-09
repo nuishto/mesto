@@ -12,11 +12,7 @@ let togglePopup = function () {
 popup.classList.toggle('popup_opened');
 }
 
-//popup.addEventListener('click', function(event) {
-//    if (event.target === event.currentTarget) {
-//        togglePopup ();
-//    }
-//})
+
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
