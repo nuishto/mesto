@@ -1,0 +1,15 @@
+.elements__photo-like {
+    min-width: 22px;
+    min-height: 19px;
+    background-image: url(../../../images/like.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    align-self: center;
+    border: 0;
+    cursor: pointer;
+}
+
+.elements__photo-like:hover {
+    background-image: url(../../../images/like-hover.svg);
+}
