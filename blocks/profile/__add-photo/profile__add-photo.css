@@ -2,6 +2,7 @@
     width: 150px;
     height: 50px;
     border: 2px solid #fff;
+    border-radius: 2px;
     background-color: #000;
     background-image: url(../../../images/button-add.png);
     background-repeat: no-repeat;
@@ -12,8 +13,7 @@
 }
 
 .profile__add-photo:hover {
-    background-image: url(../../../images/button-add-hover.png);
-    border: 2px solid rgb(218, 218, 218);
+    opacity: .5;
 }
 
 @media screen and (max-width: 500px) {
@@ -22,5 +22,6 @@
         height: 50px;
         margin: 36px 0 0 0;
         align-self: center;
+        background-image: url(../../../images/button-add-mobile.svg);
     }
 }
