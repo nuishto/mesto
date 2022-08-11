@@ -19,6 +19,7 @@
 @import url(../blocks/elements/__photo-description/elements__photo-description.css);
 @import url(../blocks/elements/__photo-name/elements__photo-name.css);
 @import url(../blocks/elements/__photo-like/elements__photo-like.css);
+@import url(../blocks/elements/__photo-like/_active/elements__photo-like_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

@@ -4,7 +4,7 @@
     border: 2px solid #fff;
     border-radius: 2px;
     background-color: #000;
-    background-image: url(../../../images/button-add.png);
+    background-image: url(../../../images/button-add.svg);
     background-repeat: no-repeat;
     background-position: center;
     box-sizing: border-box;
@@ -13,7 +13,7 @@
 }
 
 .profile__add-photo:hover {
-    opacity: .5;
+    opacity: .6;
 }
 
 @media screen and (max-width: 500px) {
