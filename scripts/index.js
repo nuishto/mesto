@@ -10,11 +10,12 @@ let profileDescription = document.querySelector('.profile__description');
 
 let popupFormAdd = document.querySelector('.popup_add');
 let cardNameInput = popupFormAdd.querySelector('.popup__container-input_type_title');
-let cardlinkInput = popupFormAdd.querySelector('.popup__container-input_type_link');
+let cardLinkInput = popupFormAdd.querySelector('.popup__container-input_type_link');
 
 //buttons
 const editButton = document.querySelector('.profile__button-edit');
 const closeButton = document.querySelector('.popup__container-close');
+const closeAddButton = document.querySelector('.popup__container-add-close')
 const addButton = document.querySelector('.profile__add-photo');
 
 //Карточки из коробки
@@ -48,7 +49,24 @@ const initialCards = [
     }
   ];
 
-//Создание card из коробки
+// Добавление новой фотки
+
+function addCard(evt) {
+  evt.preventDefault();
+  const title = cardNameInput.value;
+  console.log(cardNameInput.value);
+  const image = cardLinkInput.value;
+  console.log(cardLinkInput.value);
+  const objectCard = {
+    name: title,
+    link: image
+  }
+  elements.prepend(newCard(objectCard));
+  closeAddPopup();
+}
+
+  
+//Создание карточки 
 
 function newCard(element) {
     const newCardElement = templateElement.content.cloneNode(true);
@@ -81,23 +99,32 @@ function deleteCard(evt) {
 
 // Открытие попапа 
 
-function openPopup(PopupType) {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
+}
+
+function editPopup() {
+  namePopup();
+  openPopup(popup);
 }
 
 function addPopup() {
   openPopup(popupFormAdd);
 }
 
-
-
 // Закрытие попапа
 
-function closePopup() {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+function closeEditPopup() {
+  closePopup(popup);
+}
 
+function closeAddPopup() {
+  closePopup(popupFormAdd);
+}
 
 // Заполнение полей инфо 
 
@@ -110,14 +137,16 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
-    closePopup ();
+    closeEditPopup();
 }
+
+
 
 //Обработчики
 
-editButton.addEventListener('click', openPopup);
-editButton.addEventListener('click', namePopup);
-closeButton.addEventListener('click', closePopup);
+editButton.addEventListener('click', editPopup);
+closeButton.addEventListener('click', closeEditPopup);
+closeAddButton.addEventListener('click', closeAddPopup);
 popupForm.addEventListener('submit', formSubmitHandler); 
 addButton.addEventListener('click', addPopup);
-
+popupFormAdd.addEventListener('submit', addCard);
