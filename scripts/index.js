@@ -12,11 +12,19 @@ let popupFormAdd = document.querySelector('.popup_add');
 let cardNameInput = popupFormAdd.querySelector('.popup__container-input_type_title');
 let cardLinkInput = popupFormAdd.querySelector('.popup__container-input_type_link');
 
+//popup openphoto
+
+let openPhotoPopup = document.querySelector('.popup_photo');
+let popupPhoto = openPhotoPopup.querySelector('.popup__photo');
+let popupCaption = openPhotoPopup.querySelector('.popup__caption');
+let popupImage = openPhotoPopup.querySelector('.popup__photo');
+
 //buttons
 const editButton = document.querySelector('.profile__button-edit');
 const closeButton = document.querySelector('.popup__container-close');
 const closeAddButton = document.querySelector('.popup__container-add-close')
 const addButton = document.querySelector('.profile__add-photo');
+const closePhotoButton = document.querySelector('.popup__container-photo-close');
 
 //Карточки из коробки
 const elements = document.querySelector('.elements');
@@ -49,14 +57,12 @@ const initialCards = [
     }
   ];
 
-// Добавление новой фотки
+// Добавление новой карточки
 
 function addCard(evt) {
   evt.preventDefault();
   const title = cardNameInput.value;
-  console.log(cardNameInput.value);
   const image = cardLinkInput.value;
-  console.log(cardLinkInput.value);
   const objectCard = {
     name: title,
     link: image
@@ -79,10 +85,23 @@ function newCard(element) {
 //newCard
     newCardElement.querySelector('.elements__photo-name').textContent = element.name;
     newCardElement.querySelector('.elements__photo-image').src = element.link;
+//OpenPhoto
+    const cardPicture = newCardElement.querySelector('.elements__photo-image');
+    cardPicture.addEventListener('click', evt => openPicture(evt, element.link, element.name));
+console.log(element.link);
+console.log(element.name);
+
     elements.prepend(newCardElement);
+    return newCardElement;
 };
 
-initialCards.forEach(newCard);
+function finallyCards() {
+  initialCards.forEach(element => {
+    elements.prepend(newCard(element));
+  });
+}
+
+finallyCards();
 
 //Like function
 
@@ -95,6 +114,15 @@ function like(evt, likeButton) {
 function deleteCard(evt) {
   const element = evt.target.closest('.elements__photo');
   element.remove();
+}
+
+//Open photo function
+
+function openPicture(evt, link, name) {
+  openPopup(openPhotoPopup);
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupCaption.textContent = name;
 }
 
 // Открытие попапа 
@@ -112,6 +140,7 @@ function addPopup() {
   openPopup(popupFormAdd);
 }
 
+
 // Закрытие попапа
 
 function closePopup(popup) {
@@ -125,6 +154,11 @@ function closeEditPopup() {
 function closeAddPopup() {
   closePopup(popupFormAdd);
 }
+
+function closePhotoPopup() {
+  closePopup(openPhotoPopup);
+}
+
 
 // Заполнение полей инфо 
 
@@ -150,3 +184,5 @@ closeAddButton.addEventListener('click', closeAddPopup);
 popupForm.addEventListener('submit', formSubmitHandler); 
 addButton.addEventListener('click', addPopup);
 popupFormAdd.addEventListener('submit', addCard);
+closePhotoButton.addEventListener('click', closePhotoPopup);
+
