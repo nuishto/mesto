@@ -29,13 +29,13 @@
         <footer class="footer">
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
-        <div class="popup">
+        <div class="popup popup_edit-profile">
             <div class="popup__container">
                 <button type="button" class="popup__container-close"></button>
                 <h2 class="popup__container-title">Редактировать профиль</h2>
                 <form class="popup__container-form" name="info">
-                    <input class="popup__container-input popup__container-input_type_name" type="text" name="popupName" placeholder="Жак-Ив Кусто">
-                    <input class="popup__container-input popup__container-input_type_description" type="text" name="popupJob" placeholder="Исследователь океана">
+                    <input class="popup__container-input popup__container-input_type_name" type="text" name="popupName" placeholder="Имя">
+                    <input class="popup__container-input popup__container-input_type_description" type="text" name="popupJob" placeholder="Вид деятельности">
                     <button class="popup__container-save-button" type="submit">Сохранить</button>
                 </form>
             </div>
@@ -44,7 +44,7 @@
             <div class="popup__container">
                 <button type="button" class="popup__container-close popup__container-add-close"></button>
                 <h2 class="popup__container-title">Новое место</h2>
-                <form class="popup__container-form" name="addcard">
+                <form class="popup__container-form" name="addcard" id="addcard">
                     <input class="popup__container-input popup__container-input_type_title" type="text" name="popupTitle" placeholder="Название">
                     <input class="popup__container-input popup__container-input_type_link" type="text" name="popupLink" placeholder="Ссылка на картинку">
                     <button class="popup__container-save-button" type="submit">Создать</button>
@@ -70,7 +70,7 @@
               </div>
             </div>
           </template>
-        
+    <script src="./scripts/initial-сards.js"></script>
     <script src="./scripts/index.js"></script>
     </body>
 </html>

@@ -1,23 +1,23 @@
 //popup edit
-const popup = document.querySelector('.popup');
-let popupForm = popup.querySelector('.popup__container-form');
-let nameInput = popupForm.querySelector('.popup__container-input_type_name');
-let jobInput = popupForm.querySelector('.popup__container-input_type_description');
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
+const popupEditProfile = document.querySelector('.popup_edit-profile');
+const popupForm = popupEditProfile.querySelector('.popup__container-form');
+const nameInput = popupForm.querySelector('.popup__container-input_type_name');
+const jobInput = popupForm.querySelector('.popup__container-input_type_description');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
 
 //popup add
 
-let popupFormAdd = document.querySelector('.popup_add');
-let cardNameInput = popupFormAdd.querySelector('.popup__container-input_type_title');
-let cardLinkInput = popupFormAdd.querySelector('.popup__container-input_type_link');
+const popupFormAdd = document.querySelector('.popup_add');
+const cardNameInput = popupFormAdd.querySelector('.popup__container-input_type_title');
+const cardLinkInput = popupFormAdd.querySelector('.popup__container-input_type_link');
 
 //popup openphoto
 
-let openPhotoPopup = document.querySelector('.popup_photo');
-let popupPhoto = openPhotoPopup.querySelector('.popup__photo');
-let popupCaption = openPhotoPopup.querySelector('.popup__caption');
-let popupImage = openPhotoPopup.querySelector('.popup__photo');
+const popupZoomImage = document.querySelector('.popup_photo');
+const popupPhoto = popupZoomImage.querySelector('.popup__photo');
+const popupCaption = popupZoomImage.querySelector('.popup__caption');
+const popupImage = popupZoomImage.querySelector('.popup__photo');
 
 //buttons
 const editButton = document.querySelector('.profile__button-edit');
@@ -29,33 +29,6 @@ const closePhotoButton = document.querySelector('.popup__container-photo-close')
 //Карточки из коробки
 const elements = document.querySelector('.elements');
 const templateElement = document.querySelector('.template');
-
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
 
 // Добавление новой карточки
 
@@ -71,7 +44,6 @@ function addCard(evt) {
   closeAddPopup();
 }
 
-  
 //Создание карточки 
 
 function newCard(element) {
@@ -85,23 +57,20 @@ function newCard(element) {
 //newCard
     newCardElement.querySelector('.elements__photo-name').textContent = element.name;
     newCardElement.querySelector('.elements__photo-image').src = element.link;
+    newCardElement.querySelector('.elements__photo-name').alt = element.name;
 //OpenPhoto
     const cardPicture = newCardElement.querySelector('.elements__photo-image');
     cardPicture.addEventListener('click', evt => openPicture(evt, element.link, element.name));
-console.log(element.link);
-console.log(element.name);
-
-    elements.prepend(newCardElement);
     return newCardElement;
 };
 
-function finallyCards() {
+function renderInitialCards() {
   initialCards.forEach(element => {
     elements.prepend(newCard(element));
   });
 }
 
-finallyCards();
+renderInitialCards();
 
 //Like function
 
@@ -119,7 +88,7 @@ function deleteCard(evt) {
 //Open photo function
 
 function openPicture(evt, link, name) {
-  openPopup(openPhotoPopup);
+  openPopup(popupZoomImage);
   popupImage.src = link;
   popupImage.alt = name;
   popupCaption.textContent = name;
@@ -131,15 +100,15 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-function editPopup() {
-  namePopup();
-  openPopup(popup);
+function openEditProfilePopup() {
+  fillInEditProfileFormInputs();
+  openPopup(popupEditProfile);
 }
 
-function addPopup() {
+function openAddCardPopup() {
+  document.getElementById('addcard').reset();
   openPopup(popupFormAdd);
 }
-
 
 // Закрытие попапа
 
@@ -148,7 +117,7 @@ function closePopup(popup) {
 }
 
 function closeEditPopup() {
-  closePopup(popup);
+  closePopup(popupEditProfile);
 }
 
 function closeAddPopup() {
@@ -156,33 +125,30 @@ function closeAddPopup() {
 }
 
 function closePhotoPopup() {
-  closePopup(openPhotoPopup);
+  closePopup(popupZoomImage);
 }
-
 
 // Заполнение полей инфо 
 
-let namePopup = function () {
+let fillInEditProfileFormInputs = function () {
     nameInput.setAttribute ('value', profileName.textContent);
     jobInput.setAttribute ('value', profileDescription.textContent);
 }
 
-function formSubmitHandler (evt) {
+function submitEditProfileForm (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
     closeEditPopup();
 }
 
-
-
 //Обработчики
 
-editButton.addEventListener('click', editPopup);
+editButton.addEventListener('click', openEditProfilePopup);
 closeButton.addEventListener('click', closeEditPopup);
 closeAddButton.addEventListener('click', closeAddPopup);
-popupForm.addEventListener('submit', formSubmitHandler); 
-addButton.addEventListener('click', addPopup);
+popupForm.addEventListener('submit', submitEditProfileForm); 
+addButton.addEventListener('click', openAddCardPopup);
 popupFormAdd.addEventListener('submit', addCard);
 closePhotoButton.addEventListener('click', closePhotoPopup);
 
